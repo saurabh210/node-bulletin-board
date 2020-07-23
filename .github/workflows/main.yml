@@ -15,6 +15,13 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        with:
+          lfs: "true"
+
+      - name: checkoutLFS
+        uses: actions/checkout@v2
+      - run: git lfs pull
+
 
       - name: Build and push Docker images
         uses: docker/build-push-action@v1
@@ -23,3 +30,8 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
           repository: saurabh210/testingbuild
           tag_with_ref: true
+      - id: set_var
+        run: |
+         githubjson=`cat package.json`
+         number=`echo $(jq -r '.version' <<< "$githubjson")`
+         echo "::set-env name=version::${number}"
