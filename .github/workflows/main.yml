@@ -23,15 +23,17 @@ jobs:
       - run: git lfs pull
 
 
-      - name: Build and push Docker images
-        uses: docker/build-push-action@v1
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-          repository: saurabh210/testingbuild
-          tag_with_ref: true
+      #- name: Build and push Docker images
+      #  uses: docker/build-push-action@v1
+      #  with:
+      #    username: ${{ secrets.DOCKER_USERNAME }}
+      #    password: ${{ secrets.DOCKER_PASSWORD }}
+      #    repository: saurabh210/testingbuild
+      #    tag_with_ref: true
       - id: set_var
         run: |
+         echo $GITHUB_RUN_NUMBER
+         echo $GITHUB_REF
          githubjson=`cat package.json`
          number=`echo $(jq -r '.version' <<< "$githubjson")`
          echo $number
