@@ -34,4 +34,5 @@ jobs:
         run: |
          githubjson=`cat package.json`
          number=`echo $(jq -r '.version' <<< "$githubjson")`
+         echo $number
          echo "::set-env name=version::${number}"
