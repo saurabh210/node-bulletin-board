@@ -23,3 +23,9 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
           repository: saurabh210/testingbuild
           tag_with_ref: true
+      - id: set_var
+        run: |
+          content=`cat ./package.json`
+          echo "::set-output name=packageJson::$content"
+      - run: |
+          echo "${{fromJson(steps.set_var.outputs.packageJson).version}}"
