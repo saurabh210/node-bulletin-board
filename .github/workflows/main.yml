@@ -36,6 +36,6 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-          repository: saurabh210/testingbuild/newtest
+          repository: saurabh210/testingbuild
           tag_with_ref: true
           tags: ${{ env.version  }}-${{ github.run_number }}
